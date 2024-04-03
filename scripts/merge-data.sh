@@ -5,7 +5,7 @@ tmp_dir="$(dirname $current_dir)/tmp"
 output_dir="$(dirname $current_dir)/data"
 tags_file="$output_dir/tags.json"
 output1_file="$output_dir/smapi-game-versions.json"
-output2_file="$output_dir/game-smapi-version.json"
+output2_file="$output_dir/game-smapi-versions.json"
 
 echo "current directory: $current_dir"
 echo "tmp directory: $tmp_dir"
