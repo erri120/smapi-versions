@@ -33,6 +33,11 @@ jq -r .[] $tags_file | while read tag; do
     echo "output file is $output_file"
     echo "url is $url"
 
+    if [[ -r $output_file ]]; then
+        echo "file already exists, skipping"
+        continue
+    fi
+
     curl -sL "$url" -o "$output_file"
     sleep 1
 done
