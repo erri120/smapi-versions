@@ -53,9 +53,12 @@ jq -r .[] $tags_file | while read tag; do
     if [[ -z $maximum_game_version ]]; then
         maximum_game_version="null"
     else
-        maximum_game_version="\"$minimum_game_version\""
+        maximum_game_version="\"$maximum_game_version\""
     fi
 
-    echo "{ \"SMAPIVersion\": \"$tag\", \"MinimumGameVersion\": $minimum_game_version, \"MaximumGameVersion\": $maximum_game_version }" | jq -s '.[0]' > $output_file
+    stuff="{ \"SMAPIVersion\": \"$tag\", \"MinimumGameVersion\": $minimum_game_version, \"MaximumGameVersion\": $maximum_game_version }"
+    echo "$stuff"
+
+    echo "$stuff" | jq -s '.[0]' > $output_file
 done
 
