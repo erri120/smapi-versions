@@ -9,6 +9,9 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -32,4 +35,12 @@ jobs:
       - name: Merge Data
         shell: bash
         run: ./scripts/merge-data.sh
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
+          assignees: "erri120"
+          reviewers: "erri120"
 
