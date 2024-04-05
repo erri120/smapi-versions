@@ -38,7 +38,12 @@ jq -r .[] $tags_file | while read tag; do
         continue
     fi
 
-    curl -sL "$url" -o "$output_file"
+    if [[ -z "$GITHUB_TOKEN" ]]; then
+        curl -sL "$url" -o "$output_file"
+    else
+        curl -sL --header "Authorization: Bearer $GITHUB_TOKEN" "$url" -o "$output_file"
+    fi
+
     sleep 1
 done
 

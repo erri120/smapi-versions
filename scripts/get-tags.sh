@@ -29,7 +29,12 @@ while true; do
     echo "page is $page"
     echo "url is $url"
 
-    response=$(curl -sL "$url")
+    if [[ -z "$GITHUB_TOKEN" ]]; then
+        response=$(curl -sL "$url")
+    else
+        response=$(curl -sL --header "Authorization: Bearer $GITHUB_TOKEN" "$url")
+    fi
+
     tags=$(echo "$response" | jq '.[].tag_name' | jq -s .)
     echo "tags: $tags"
 
