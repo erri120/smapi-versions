@@ -1,0 +1,35 @@
+name: Daily
+
+on:
+  workflow_dispatch:
+  schedule:
+    # https://crontab.guru/#42_9_*_*_*
+    - cron: "42 9 * * *"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Tags
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./scripts/get-tags.sh
+
+      - name: Get Files
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./scripts/get-files.sh
+
+      - name: Extract Versions
+        shell: bash
+        run: ./scripts/extract-versions.sh
+
+      - name: Merge Data
+        shell: bash
+        run: ./scripts/merge-data.sh
+
