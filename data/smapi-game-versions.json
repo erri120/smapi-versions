@@ -1,4 +1,8 @@
 {
+  "4.1.7": {
+    "MinimumGameVersion": "1.6.14",
+    "MaximumGameVersion": null
+  },
   "4.1.6": {
     "MinimumGameVersion": "1.6.10",
     "MaximumGameVersion": null
